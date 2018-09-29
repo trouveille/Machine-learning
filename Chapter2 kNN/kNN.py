@@ -1,17 +1,15 @@
+# 给定数据含有四个样本，一共有两个类。每个样本含有两个特征。
 
 # coding: utf-8
 
-# In[1]:
-
+# In[1]: 导入包
 
 from numpy import *
 
 import operator     #导入需要用到的包
 
 
-# In[2]:
-
-
+# In[2]: 导入数据
 
 def creatdataset():
 
@@ -22,9 +20,7 @@ def creatdataset():
     return group,labels
 
 
-# In[3]:
-
-
+# In[3]: KNN算法
 
 def classify0(inx,dataset,labels,k):     #inX是你要输入的要分类的“坐标”，dataSet是上面createDataSet的array，
 
@@ -44,8 +40,6 @@ def classify0(inx,dataset,labels,k):     #inX是你要输入的要分类的“�
 
     distance=sqdistances**0.5     #这样求出来就是欧式距离
 
-    
-
     sorteddistanceindicies=distance.argsort()    #argsort是排序，将元素按照由小到大的顺序返回下标，比如([3,1,2]),它返回的就是([1,2,0])  
 
     classcount={}
@@ -56,16 +50,11 @@ def classify0(inx,dataset,labels,k):     #inX是你要输入的要分类的“�
 
         classcount[votelabel]=classcount.get(votelabel,0)+1        #求每个类别的个数，有‘A’就让'A'的计数加1
 
-        
-
     sortclass=sorted(classcount.items(),key=operator.itemgetter(1),reverse=True)   #从大到小排序
 
     return sortclass[0][0]   #第一个就是最大的，返回最大的类别就是预测的类别
 
-
-# In[4]:
-
-
+# In[4]: 输入预测样本
 
 group,labels=creatdataset()
 
@@ -73,3 +62,4 @@ classre=classify0([0,0],group,labels,3)      #要预测的样本是【0,0】这�
 
 print(classre)
 
+#结果是B，没什么问题
